@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тың игеру зертханалары</title>
+<style>
+  :root{
+    --bg:#f5f1e8;
+    --paper:#fffdf8;
+    --navy:#17324d;
+    --gold:#c7932f;
+    --brown:#8b5a2b;
+    --green:#2e6b57;
+    --blue:#315f8f;
+    --purple:#5e4b8b;
+    --muted:#6f6a61;
+    --line:#ded6c7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:linear-gradient(180deg,#f6f1e7 0%,#efe8db 100%);
+    color:#1f2a35;
+  }
+  header{
+    background:linear-gradient(135deg,#17324d,#254c70);
+    color:white;
+    padding:28px 24px 22px;
+    position:sticky; top:0; z-index:10;
+    box-shadow:0 3px 12px rgba(0,0,0,.15);
+  }
+  header .wrap{max-width:1200px;margin:auto}
+  h1{margin:0;font-size:clamp(28px,4vw,46px);line-height:1.05}
+  .subtitle{margin-top:8px;font-size:clamp(15px,2vw,20px);opacity:.92}
+  .question{
+    margin-top:14px;padding:10px 14px;border-left:4px solid var(--gold);
+    background:rgba(255,255,255,.08);border-radius:8px;
+  }
+  main{max-width:1200px;margin:24px auto;padding:0 18px 60px}
+  .hero{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 8px 24px rgba(52,44,34,.08);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}
+  .steps{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .step{
+    background:#f0e7d6;border:1px solid #ddc79b;color:#654819;
+    padding:8px 12px;border-radius:999px;font-weight:700;
+  }
+  .timer-card{
+    background:#12263a;color:white;border-radius:16px;padding:18px;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    min-height:180px;
+  }
+  #timer{font-size:54px;font-weight:800;letter-spacing:2px}
+  .timer-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center}
+  button{
+    border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;
+  }
+  .btn-gold{background:var(--gold);color:white}
+  .btn-light{background:white;color:var(--navy)}
+  .section-title{
+    margin:28px 0 14px;font-size:26px;color:var(--navy);
+  }
+  .labs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .lab-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.06);
+    transition:.2s transform,.2s box-shadow;
+  }
+  .lab-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.10)}
+  .lab-head{padding:16px;color:white;font-weight:800;font-size:18px}
+  .lab-body{padding:16px}
+  .tag{display:inline-block;padding:5px 9px;border-radius:999px;background:#eee6d8;font-size:12px;font-weight:700;margin-bottom:10px}
+  .lab-body h3{margin:4px 0 8px;font-size:20px}
+  .lab-body p{margin:6px 0 10px;color:#4f5357;line-height:1.45}
+  .lab-card button{width:100%;margin-top:10px}
+  .lit .lab-head{background:var(--brown)} .lit button{background:var(--brown);color:#fff}
+  .bio .lab-head{background:var(--green)} .bio button{background:var(--green);color:#fff}
+  .geo .lab-head{background:var(--blue)} .geo button{background:var(--blue);color:#fff}
+  .it .lab-head{background:var(--purple)} .it button{background:var(--purple);color:#fff}
+  .panel{
+    display:none;margin-top:18px;background:var(--paper);border:1px solid var(--line);
+    border-radius:16px;padding:20px;box-shadow:0 8px 24px rgba(0,0,0,.06);
+  }
+  .panel.active{display:block}
+  .panel h2{margin-top:0;color:var(--navy)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .box{border:1px solid var(--line);background:#fffaf1;border-radius:14px;padding:16px}
+  .box h4{margin:0 0 8px;color:var(--navy)}
+  ol,ul{padding-left:22px}
+  li{margin:7px 0;line-height:1.4}
+  .product{
+    border:2px dashed #c9a85f;background:#fff7e4;padding:14px;border-radius:12px;
+    font-weight:700;color:#6d4f1b;
+  }
+  .rubric{
+    width:100%;border-collapse:collapse;margin-top:10px;background:white;
+  }
+  .rubric th,.rubric td{border:1px solid var(--line);padding:9px;text-align:left}
+  .rubric th{background:#f1eadf;color:var(--navy)}
+  .checklist label{display:block;margin:8px 0}
+  .checklist input{transform:scale(1.15);margin-right:8px}
+  .ai{
+    border-left:5px solid var(--purple);background:#f5f1ff;padding:14px;border-radius:10px;
+  }
+  textarea{
+    width:100%;min-height:110px;border:1px solid #cfc7dd;border-radius:10px;padding:10px;
+    font-family:inherit;font-size:14px;resize:vertical;
+  }
+  .footer-note{
+    margin-top:28px;padding:16px;border-radius:14px;background:#17324d;color:white;
+    text-align:center;font-weight:700;
+  }
+  @media(max-width:900px){
+    .hero-grid,.grid2{grid-template-columns:1fr}
+    .labs{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:600px){
+    .labs{grid-template-columns:1fr}
+    header{position:static}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Тың игеру: 4 зертхана</h1>
+    <div class="subtitle">4 көзқарас → 4 өнім → 1 тарихи қорытынды</div>
+    <div class="question"><b>Зерттеу сұрағы:</b> Тың және тыңайған жерлерді игеру саясаты Қазақстанға қалай әсер етті?</div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <h2 style="margin-top:0;color:#17324d">Топтық зерттеу миссиясы</h2>
+        <p>Әр зертхана тың игерудің бір қырын зерттейді. Міндет — берілген деректі талдап, өз пәндеріңнің көзқарасын пайдаланып, <b>көрінетін өнім</b> дайындау және 1 минутта қорғау.</p>
+        <div class="steps">
+          <span class="step">1. Дерек</span>
+          <span class="step">2. Талдау</span>
+          <span class="step">3. Өнім</span>
+          <span class="step">4. Дәлелді қорытынды</span>
+        </div>
+      </div>
+      <div class="timer-card">
+        <div>Жұмыс уақыты</div>
+        <div id="timer">08:00</div>
+        <div class="timer-actions">
+          <button class="btn-gold" onclick="startTimer()">Бастау</button>
+          <button class="btn-light" onclick="pauseTimer()">Пауза</button>
+          <button class="btn-light" onclick="resetTimer()">Қайта</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Зертхананы таңдаңыз</h2>
+  <section class="labs">
+    <article class="lab-card lit">
+      <div class="lab-head">📖 Тарих × Әдебиет</div>
+      <div class="lab-body">
+        <span class="tag">АДАМ</span>
+        <h3>Тарихи күнделік</h3>
+        <p>Демографиялық және мәдени өзгерісті адам тағдыры арқылы көрсетіңіз.</p>
+        <button onclick="openPanel('litPanel')">Миссияны ашу</button>
+      </div>
+    </article>
+
+    <article class="lab-card bio">
+      <div class="lab-head">🌱 Тарих × Биология</div>
+      <div class="lab-body">
+        <span class="tag">ТАБИҒАТ</span>
+        <h3>Экологиялық диагноз</h3>
+        <p>Жерді игеру, өсімдік жамылғысы және эрозия арасындағы байланысты зерттеңіз.</p>
+        <button onclick="openPanel('bioPanel')">Миссияны ашу</button>
+      </div>
+    </article>
+
+    <article class="lab-card geo">
+      <div class="lab-head">🗺️ Тарих × География</div>
+      <div class="lab-body">
+        <span class="tag">КЕҢІСТІК</span>
+        <h3>Тарихи-географиялық карта</h3>
+        <p>Тың игеру аумақтарын, көші-қонды және демографиялық өзгерісті картада көрсетіңіз.</p>
+        <button onclick="openPanel('geoPanel')">Миссияны ашу</button>
+      </div>
+    </article>
+
+    <article class="lab-card it">
+      <div class="lab-head">💻 Тарих × Информатика + ЖИ</div>
+      <div class="lab-body">
+        <span class="tag">ДЕРЕК</span>
+        <h3>Цифрлық инфографика</h3>
+        <p>Сандық деректерді визуалға айналдырып, ЖИ тұжырымын фактчекингтен өткізіңіз.</p>
+        <button onclick="openPanel('itPanel')">Миссияны ашу</button>
+      </div>
+    </article>
+  </section>
+
+  <section id="litPanel" class="panel">
+    <h2>📖 «АДАМ» зертханасы — Тарих × Әдебиет</h2>
+    <div class="grid2">
+      <div class="box">
+        <h4>Тапсырма</h4>
+        <p>1950–1960 жылдардағы Қазақстан тұрғынының атынан 5–6 сөйлемдік тарихи күнделік жазыңыз.</p>
+        <div class="product">Өнім: «Тың игеру дәуіріндегі бір күн» тарихи күнделігі</div>
+      </div>
+      <div class="box">
+        <h4>Орындау алгоритмі</h4>
+        <ol>
+          <li>Демографиялық және мәдени деректерді оқыңыз.</li>
+          <li>Кейіпкерді таңдаңыз: жергілікті тұрғын, мұғалім, жас маман немесе ауыл тұрғыны.</li>
+          <li>Кейіпкер өміріндегі 2 өзгерісті белгілеңіз.</li>
+          <li>Кемінде 2 тарихи деректі енгізіңіз.</li>
+          <li>Себеп пен салдарды байланыстырыңыз.</li>
+          <li>1 сөйлемдік қорытынды жазыңыз.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="box">
+      <h4>Дескриптор — 6 балл</h4>
+      <table class="rubric">
+        <tr><th>Критерий</th><th>Балл</th></tr>
+        <tr><td>Демографиялық өзгерісті дұрыс көрсетті</td><td>1</td></tr>
+        <tr><td>Мәдени/әлеуметтік өзгерісті көрсетті</td><td>1</td></tr>
+        <tr><td>Кемінде 2 тарихи дерек қолданды</td><td>1</td></tr>
+        <tr><td>Тарихи жағдайды кейіпкер арқылы жеткізді</td><td>1</td></tr>
+        <tr><td>Себеп пен салдарды байланыстырды</td><td>1</td></tr>
+        <tr><td>Дәлелді қорытынды жасады</td><td>1</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="bioPanel" class="panel">
+    <h2>🌱 «ТАБИҒАТ» зертханасы — Тарих × Биология</h2>
+    <div class="grid2">
+      <div class="box">
+        <h4>Тапсырма</h4>
+        <p>«Тың игеру экожүйеге қалай әсер етті?» сұрағына биолог-зерттеуші ретінде жауап беріңіз.</p>
+        <div class="product">Өнім: «Экологиялық диагноз» постері</div>
+      </div>
+      <div class="box">
+        <h4>Орындау алгоритмі</h4>
+        <ol>
+          <li>Экологиялық деректерді зерттеңіз.</li>
+          <li>Табиғатқа әсер еткен тарихи әрекетті анықтаңыз.</li>
+          <li>Өсімдік пен топыраққа әсерін түсіндіріңіз.</li>
+          <li>Экологиялық салдарды көрсетіңіз.</li>
+          <li>Ауыл шаруашылығына әсерін жазыңыз.</li>
+          <li>Бір негізделген шешім ұсыныңыз.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="box">
+      <h4>Постер формуласы</h4>
+      <p><b>Тарихи әрекет → Биологиялық өзгеріс → Экологиялық салдар → Адамға/шаруашылыққа әсер → Шешім</b></p>
+      <h4>Дескриптор — 6 балл</h4>
+      <table class="rubric">
+        <tr><th>Критерий</th><th>Балл</th></tr>
+        <tr><td>Тарихи әрекетті дұрыс анықтады</td><td>1</td></tr>
+        <tr><td>Өсімдік/топыраққа әсерін түсіндірді</td><td>1</td></tr>
+        <tr><td>Экологиялық салдарды көрсетті</td><td>1</td></tr>
+        <tr><td>Тарих пен биология байланысын ашты</td><td>1</td></tr>
+        <tr><td>Ауыл шаруашылығына әсерін түсіндірді</td><td>1</td></tr>
+        <tr><td>Негізделген шешім ұсынды</td><td>1</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="geoPanel" class="panel">
+    <h2>🗺️ «КЕҢІСТІК» зертханасы — Тарих × География</h2>
+    <div class="grid2">
+      <div class="box">
+        <h4>Тапсырма</h4>
+        <p>Қазақстан картасында тың игерудің кеңістіктік және демографиялық өзгерістерін көрсетіңіз.</p>
+        <div class="product">Өнім: «Тың игеру: жер мен халықтың өзгерісі» тарихи-географиялық картасы</div>
+      </div>
+      <div class="box">
+        <h4>Орындау алгоритмі</h4>
+        <ol>
+          <li>Тың игерілген негізгі аумақтарды анықтаңыз.</li>
+          <li>Оларды картадан белгілеңіз.</li>
+          <li>Неліктен осы аумақтар таңдалғанын түсіндіріңіз.</li>
+          <li>Халықтың сырттан келу бағытын көрсетіңіз.</li>
+          <li>Демографиялық салдарын анықтаңыз.</li>
+          <li>Карта негізінде қорытынды жасаңыз.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="box">
+      <h4>Картада 3 қабат болсын</h4>
+      <p>🟢 <b>Жер:</b> қайда игерілді? &nbsp; 🔵 <b>Адам:</b> халық қайдан келді? &nbsp; 🔴 <b>Салдар:</b> қандай өзгеріс болды?</p>
+      <h4>Дескриптор — 6 балл</h4>
+      <table class="rubric">
+        <tr><th>Критерий</th><th>Балл</th></tr>
+        <tr><td>Тың игерілген аумақтарды дұрыс көрсетті</td><td>1</td></tr>
+        <tr><td>Географиялық ерекшелігін түсіндірді</td><td>1</td></tr>
+        <tr><td>Көші-қон бағытын көрсетті</td><td>1</td></tr>
+        <tr><td>Демографиялық өзгерісті анықтады</td><td>1</td></tr>
+        <tr><td>Тарих пен география байланысын ашты</td><td>1</td></tr>
+        <tr><td>Карта бойынша дәлелді қорытынды жасады</td><td>1</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="itPanel" class="panel">
+    <h2>💻 «ДЕРЕК» зертханасы — Тарих × Информатика + ЖИ</h2>
+    <div class="grid2">
+      <div class="box">
+        <h4>Тапсырма</h4>
+        <p>3–4 сандық тарихи деректі цифрлық инфографикаға айналдырып, ЖИ тұжырымын фактчекингтен өткізіңіз.</p>
+        <div class="product">Өнім: «Тың игеру: деректер не дейді?» цифрлық инфографикасы / 1 слайд</div>
+      </div>
+      <div class="box">
+        <h4>Орындау алгоритмі</h4>
+        <ol>
+          <li>3–4 сандық деректі таңдаңыз.</li>
+          <li>Оларды кесте/диаграмма түрінде көрсетіңіз.</li>
+          <li>Оң және теріс көрсеткішті белгілеңіз.</li>
+          <li>Төмендегі prompt-ты ЖИ-ға енгізіңіз.</li>
+          <li>ЖИ жауабын тарихи дерекпен тексеріңіз.</li>
+          <li>Түзетілген қорытындыны инфографикаға енгізіңіз.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="ai">
+      <h4 style="margin-top:0">ЖИ-ға арналған prompt</h4>
+      <textarea id="promptText" readonly>Тың игеру Қазақстан үшін толықтай тиімді саясат болды деген тұжырымға қысқа жауап бер. Артықшылықтары мен кемшіліктерін көрсет. Жауапты 3 сөйлемнен асырма.</textarea>
+      <button class="btn-gold" onclick="copyPrompt()">Prompt-ты көшіру</button>
+      <p style="margin-bottom:0"><b>Маңызды:</b> ЖИ жауабы — тарихи дәлел емес. Оны берілген деректермен тексеріңіз.</p>
+    </div>
+    <div class="box">
+      <h4>Дескриптор — 6 балл</h4>
+      <table class="rubric">
+        <tr><th>Критерий</th><th>Балл</th></tr>
+        <tr><td>Кемінде 3 сандық деректі дұрыс қолданды</td><td>1</td></tr>
+        <tr><td>Деректерді диаграмма/кестемен көрсетті</td><td>1</td></tr>
+        <tr><td>Оң өзгерісті анықтады</td><td>1</td></tr>
+        <tr><td>Теріс өзгерісті анықтады</td><td>1</td></tr>
+        <tr><td>ЖИ жауабының біржақтылығын дәлелдеді</td><td>1</td></tr>
+        <tr><td>Тарихи дерекке негізделген түзетілген қорытынды жасады</td><td>1</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="footer-note">
+    Қорғау формуласы: «Біздің өнім — … / Негізгі өзгеріс — … / Дәлел — … / Сондықтан қорытындымыз — …»
+  </section>
+</main>
+
+<script>
+let total = 480;
+let current = total;
+let timerId = null;
+
+function renderTimer(){
+  const m = Math.floor(current/60).toString().padStart(2,'0');
+  const s = (current%60).toString().padStart(2,'0');
+  document.getElementById('timer').textContent = `${m}:${s}`;
+}
+function startTimer(){
+  if(timerId) return;
+  timerId = setInterval(()=>{
+    if(current>0){ current--; renderTimer(); }
+    else { clearInterval(timerId); timerId=null; alert('Уақыт аяқталды. Қорғауға дайындалыңыз!'); }
+  },1000);
+}
+function pauseTimer(){ clearInterval(timerId); timerId=null; }
+function resetTimer(){ pauseTimer(); current=total; renderTimer(); }
+function openPanel(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById(id);
+  el.classList.add('active');
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function copyPrompt(){
+  const t=document.getElementById('promptText');
+  navigator.clipboard.writeText(t.value).then(()=>alert('Prompt көшірілді'));
+}
+</script>
+</body>
+</html>
